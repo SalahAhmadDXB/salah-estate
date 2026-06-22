@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#0C0C0E;overflow-x:hidden}
+  ::selection{background:#C9A24B;color:#0C0C0E}
+  input,textarea{font-family:inherit}
+  input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:2px;background:rgba(201,162,75,0.25)}
+  input[type=range]::-moz-range-track{height:2px;background:rgba(201,162,75,0.25)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;background:#0C0C0E;border:1.5px solid #C9A24B;margin-top:-7px;box-shadow:0 0 0 4px rgba(201,162,75,0.12)}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#0C0C0E;border:1.5px solid #C9A24B}
+  @keyframes scrollcue{0%{transform:translateY(0);opacity:0}40%{opacity:1}100%{transform:translateY(10px);opacity:0}}
+  @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+  image-slot{--is-bg:transparent}
+  .rv{opacity:0;transform:translateY(34px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+  .rv.in{opacity:1;transform:none}
+  .rvfade{opacity:0;transition:opacity 1.4s ease}
+  .rvfade.in{opacity:1}
+  @media (prefers-reduced-motion:reduce){.rv,.rvfade{opacity:1!important;transform:none!important;transition:none!important}}
+  nav{transition:padding .5s cubic-bezier(.2,.7,.2,1),background .5s ease,box-shadow .5s ease}
+  nav.nav-scrolled{padding:14px clamp(24px,5vw,72px)!important;background:rgba(10,10,12,0.94)!important;box-shadow:0 12px 40px -28px rgba(0,0,0,0.9)}
+</style>
+</helmet>
+
+<div style="font-family:'Jost',sans-serif;color:#F2EEE6;background:#0C0C0E;position:relative;width:100%;overflow-x:hidden">
+
+  <!-- NAV -->
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(24px,5vw,72px);backdrop-filter:blur(14px);background:linear-gradient(180deg,rgba(12,12,14,0.85),rgba(12,12,14,0.4));border-bottom:1px solid rgba(201,162,75,0.12)">
+    <a href="#top" style="text-decoration:none;display:flex;align-items:center;gap:12px">
+      <span style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:3px;color:#F2EEE6">SALAH</span>
+      <span style="width:1px;height:20px;background:rgba(201,162,75,0.4)"></span>
+      <span style="font-size:10px;letter-spacing:3px;color:#C9A24B;text-transform:uppercase;font-weight:400;white-space:nowrap">Private Estates</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:clamp(18px,3vw,42px)">
+      <a href="#invest" style="text-decoration:none;color:#B8B3A6;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:400">Why Dubai</a>
+      <a href="#portfolio" style="text-decoration:none;color:#B8B3A6;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:400">Portfolio</a>
+      <a href="#calculator" style="text-decoration:none;color:#B8B3A6;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:400">ROI Calculator</a>
+      <a href="#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border:1px solid rgba(201,162,75,0.5);color:#E8D29A;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border-radius:2px">Book a Consultation</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="top" style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:150px 0 100px;background:radial-gradient(120% 90% at 70% 10%,#1b1813 0%,#0C0C0E 55%)">
+    <image-slot id="hero-bg" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" fit="cover" placeholder="Drop hero footage / skyline image"></image-slot>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(12,12,14,0.92) 0%,rgba(12,12,14,0.7) 45%,rgba(12,12,14,0.35) 100%)"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,12,14,0.5) 0%,transparent 25%,transparent 65%,rgba(12,12,14,0.95) 100%)"></div>
+    <div style="position:relative;z-index:5;pointer-events:none;max-width:1320px;margin:0 auto;width:100%;padding:0 clamp(24px,5vw,72px)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
+        <span style="width:46px;height:1px;background:#C9A24B"></span>
+        <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B;font-weight:400">Dubai · Private Real Estate Advisory</span>
+      </div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,7vw,108px);line-height:0.98;letter-spacing:-1px;color:#F4F1EA;max-width:14ch">Own a piece of the world's <span style="font-style:italic;background:linear-gradient(100deg,#E8D29A,#C9A24B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">fastest-rising</span> skyline.</h1>
+      <p style="margin-top:30px;max-width:54ch;font-size:clamp(15px,1.4vw,19px);line-height:1.7;color:#B8B3A6;font-weight:300">Tax-free income. Freehold ownership. Double-digit appreciation. I help global investors acquire Dubai's most coveted villas and branded residences — quietly, and on the right terms.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:42px;pointer-events:auto">
+        <a href="#portfolio" style="text-decoration:none;display:inline-flex;align-items:center;gap:12px;padding:17px 34px;background:linear-gradient(100deg,#E8D29A,#C9A24B);color:#0C0C0E;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:2px">View the Portfolio</a>
+        <a href="#calculator" style="text-decoration:none;display:inline-flex;align-items:center;gap:12px;padding:17px 34px;border:1px solid rgba(242,238,230,0.25);color:#F2EEE6;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border-radius:2px">Calculate Your Returns</a>
+      </div>
+    </div>
+    <div style="position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none">
+      <span style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6f6a5e">Scroll</span>
+      <div style="width:1px;height:42px;background:rgba(201,162,75,0.3);position:relative;overflow:hidden"><span style="position:absolute;top:0;left:0;width:1px;height:14px;background:#C9A24B;animation:scrollcue 1.8s ease-in-out infinite"></span></div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div style="border-top:1px solid rgba(201,162,75,0.12);border-bottom:1px solid rgba(201,162,75,0.12);background:#0A0A0C">
+    <div style="max-width:1320px;margin:0 auto;padding:26px clamp(24px,5vw,72px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px">
+      <span style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#6f6a5e">Trusted access to Dubai's leading developers</span>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(20px,3vw,46px)">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:2px;color:#928d80">EMAAR</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:2px;color:#928d80">OMNIYAT</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:2px;color:#928d80">MERAAS</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:2px;color:#928d80">NAKHEEL</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:19px;letter-spacing:2px;color:#928d80">SOBHA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT SALAH -->
+  <section style="max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,150px) clamp(24px,5vw,72px);display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(40px,6vw,90px);align-items:center">
+    <div style="position:relative">
+      <div style="position:absolute;inset:-14px -14px 28px 28px;border:1px solid rgba(201,162,75,0.35);border-radius:3px;pointer-events:none"></div>
+      <img src="assets/salah-portrait.jpg" alt="Salah" style="position:relative;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 28%;border-radius:3px;display:block;filter:contrast(1.02)">
+      <div style="position:absolute;left:-1px;bottom:18px;background:#0C0C0E;border:1px solid rgba(201,162,75,0.3);padding:16px 22px;border-radius:2px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#E8D29A;line-height:1">AED 63M+</div>
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8E897C;margin-top:4px">Advised &amp; Transacted</div>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+        <span style="width:46px;height:1px;background:#C9A24B"></span>
+        <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">The Advisor</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.4vw,60px);line-height:1.05;color:#F4F1EA;letter-spacing:-0.5px">A discreet partner for serious capital.</h2>
+      <p style="margin-top:26px;font-size:17px;line-height:1.8;color:#B8B3A6;font-weight:300;max-width:58ch">For over a decade, Salah has guided high-net-worth families, funds, and first-time international buyers into Dubai's prime real estate. No call centres, no mass listings — only carefully sourced opportunities, honest numbers, and a relationship that lasts well beyond the handover.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:46px;border-top:1px solid rgba(201,162,75,0.14);padding-top:36px">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);color:#E8D29A;line-height:1">6+</div>
+          <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E897C;margin-top:8px">Years in Dubai</div>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);color:#E8D29A;line-height:1">30+</div>
+          <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E897C;margin-top:8px">Families Served</div>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,48px);color:#E8D29A;line-height:1">13</div>
+          <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8E897C;margin-top:8px">Nationalities</div>
+        </div>
+      </div>
+      <a href="#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:12px;margin-top:42px;color:#E8D29A;font-size:12px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(201,162,75,0.4);padding-bottom:6px">Arrange a private call →</a>
+    </div>
+  </section>
+
+  <!-- INVESTMENT CASE -->
+  <section id="invest" style="background:linear-gradient(180deg,#0A0A0C,#100E0B 60%,#0A0A0C);border-top:1px solid rgba(201,162,75,0.12);border-bottom:1px solid rgba(201,162,75,0.12)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,150px) clamp(24px,5vw,72px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(48px,6vw,80px)">
+        <div style="max-width:46ch">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+            <span style="width:46px;height:1px;background:#C9A24B"></span>
+            <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">The Investment Case</span>
+          </div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.6vw,64px);line-height:1.04;color:#F4F1EA;letter-spacing:-0.5px">Why the world's capital is moving to Dubai.</h2>
+        </div>
+        <p style="max-width:40ch;font-size:15px;line-height:1.7;color:#8E897C;font-weight:300">A rare combination of zero tax, political stability, and structural growth has made Dubai the most compelling property market on earth.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(201,162,75,0.14);border:1px solid rgba(201,162,75,0.14)">
+        <div style="background:#0C0C0E;padding:38px 30px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);color:#E8D29A;line-height:0.95">0%</div>
+          <div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B3A6;margin-top:14px;font-weight:500">Income &amp; Capital Gains Tax</div>
+          <p style="font-size:13px;line-height:1.6;color:#767165;margin-top:10px;font-weight:300">Keep 100% of your rental yield and resale profit.</p>
+        </div>
+        <div style="background:#0C0C0E;padding:38px 30px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);color:#E8D29A;line-height:0.95">6–9%</div>
+          <div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B3A6;margin-top:14px;font-weight:500">Typical Net Rental Yields</div>
+          <p style="font-size:13px;line-height:1.6;color:#767165;margin-top:10px;font-weight:300">Among the highest of any global prime market.</p>
+        </div>
+        <div style="background:#0C0C0E;padding:38px 30px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);color:#E8D29A;line-height:0.95">100%</div>
+          <div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B3A6;margin-top:14px;font-weight:500">Foreign Freehold Ownership</div>
+          <p style="font-size:13px;line-height:1.6;color:#767165;margin-top:10px;font-weight:300">Full ownership in designated freehold zones.</p>
+        </div>
+        <div style="background:#0C0C0E;padding:38px 30px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,68px);color:#E8D29A;line-height:0.95">10yr</div>
+          <div style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#B8B3A6;margin-top:14px;font-weight:500">Golden Visa from AED 2M</div>
+          <p style="font-size:13px;line-height:1.6;color:#767165;margin-top:10px;font-weight:300">Long-term residency for you and your family.</p>
+        </div>
+      </div>
+
+      <!-- appreciation infographic -->
+      <div style="margin-top:1px;display:grid;grid-template-columns:1.2fr 1fr;gap:1px;background:rgba(201,162,75,0.14);border:1px solid rgba(201,162,75,0.14);border-top:none">
+        <div style="background:#0C0C0E;padding:clamp(34px,4vw,52px)">
+          <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#C9A24B;margin-bottom:34px">Prime Residential Price Index — indexed to 100</div>
+          <div style="display:flex;align-items:flex-end;gap:clamp(10px,2vw,26px);height:230px">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:12px;height:100%;justify-content:flex-end">
+              <span style="font-size:13px;color:#8E897C">100</span>
+              <div style="width:100%;height:46%;background:linear-gradient(180deg,#3a352a,#1c1a15);border-top:2px solid #6f6a5e"></div>
+              <span style="font-size:11px;letter-spacing:1px;color:#767165">2020</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:12px;height:100%;justify-content:flex-end">
+              <span style="font-size:13px;color:#8E897C">131</span>
+              <div style="width:100%;height:60%;background:linear-gradient(180deg,#4a4230,#221f17);border-top:2px solid #8a7f5a"></div>
+              <span style="font-size:11px;letter-spacing:1px;color:#767165">2022</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:12px;height:100%;justify-content:flex-end">
+              <span style="font-size:13px;color:#C9A24B">168</span>
+              <div style="width:100%;height:80%;background:linear-gradient(180deg,#9a7f3e,#3a2f17);border-top:2px solid #C9A24B"></div>
+              <span style="font-size:11px;letter-spacing:1px;color:#767165">2024</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:12px;height:100%;justify-content:flex-end">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#E8D29A">190+</span>
+              <div style="width:100%;height:100%;background:linear-gradient(180deg,#E8D29A,#9a7f3e 60%,#3a2f17);border-top:2px solid #E8D29A;box-shadow:0 0 24px rgba(201,162,75,0.25)"></div>
+              <span style="font-size:11px;letter-spacing:1px;color:#C9A24B">2025</span>
+            </div>
+          </div>
+        </div>
+        <div style="background:#0C0C0E;padding:clamp(34px,4vw,52px);display:flex;flex-direction:column;justify-content:center;gap:30px">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px"><span style="font-size:13px;letter-spacing:1px;color:#B8B3A6">Population growth 2024</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#E8D29A">+5.2%</span></div>
+            <div style="height:5px;background:rgba(201,162,75,0.12);border-radius:3px;overflow:hidden"><div style="width:62%;height:100%;background:linear-gradient(90deg,#9a7f3e,#E8D29A)"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px"><span style="font-size:13px;letter-spacing:1px;color:#B8B3A6">Annual tourist arrivals</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#E8D29A">18.7M</span></div>
+            <div style="height:5px;background:rgba(201,162,75,0.12);border-radius:3px;overflow:hidden"><div style="width:84%;height:100%;background:linear-gradient(90deg,#9a7f3e,#E8D29A)"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px"><span style="font-size:13px;letter-spacing:1px;color:#B8B3A6">Transaction volume YoY</span><span style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#E8D29A">+23%</span></div>
+            <div style="height:5px;background:rgba(201,162,75,0.12);border-radius:3px;overflow:hidden"><div style="width:74%;height:100%;background:linear-gradient(90deg,#9a7f3e,#E8D29A)"></div></div>
+          </div>
+          <p style="font-size:11px;line-height:1.6;color:#5f5b52;font-weight:300;margin-top:4px">Figures are indicative market context for illustration. Salah will share verified, current data for your specific opportunity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO / VILLA SHOWCASE -->
+  <section id="portfolio" style="max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,150px) clamp(24px,5vw,72px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(40px,5vw,68px)">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+          <span style="width:46px;height:1px;background:#C9A24B"></span>
+          <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">Selected Portfolio</span>
+        </div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.6vw,64px);line-height:1.04;color:#F4F1EA;letter-spacing:-0.5px">Villas &amp; branded residences.</h2>
+      </div>
+      <p style="max-width:38ch;font-size:15px;line-height:1.7;color:#8E897C;font-weight:300">A rotating selection of off-market and signature listings. Drop your own imagery into any frame.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,2.5vw,34px)">
+      <sc-for list="{{ villas }}" as="v" hint-placeholder-count="4">
+        <div style="position:relative;border:1px solid rgba(201,162,75,0.14);border-radius:3px;overflow:hidden;background:#0A0A0C;transition:transform 0.7s cubic-bezier(.2,.7,.2,1),border-color 0.7s,box-shadow 0.7s" style-hover="transform:translateY(-8px);border-color:rgba(201,162,75,0.45);box-shadow:0 22px 50px -24px rgba(0,0,0,0.8)">
+          <image-slot id="{{ v.slot }}" style="width:100%;height:clamp(280px,34vw,460px);display:block" shape="rect" fit="cover" placeholder="{{ v.placeholder }}"></image-slot>
+          <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 45%,rgba(10,10,12,0.92))"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:clamp(22px,2.5vw,34px);pointer-events:none">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0C0C0E;background:linear-gradient(100deg,#E8D29A,#C9A24B);padding:5px 10px;border-radius:2px;font-weight:600">{{ v.tag }}</span>
+              <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#B8B3A6">{{ v.area }}</span>
+            </div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,2.6vw,36px);color:#F4F1EA;line-height:1.05">{{ v.name }}</h3>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:14px">
+              <span style="font-size:13px;color:#B8B3A6;font-weight:300">{{ v.specs }}</span>
+              <span style="width:4px;height:4px;border-radius:50%;background:#C9A24B"></span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#E8D29A">{{ v.price }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- DEVELOPERS -->
+  <section style="background:#0A0A0C;border-top:1px solid rgba(201,162,75,0.12);border-bottom:1px solid rgba(201,162,75,0.12)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(70px,8vw,110px) clamp(24px,5vw,72px)">
+      <div style="text-align:center;margin-bottom:clamp(40px,5vw,64px)">
+        <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">Direct Developer Access</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.6vw,48px);line-height:1.1;color:#F4F1EA;margin-top:18px;letter-spacing:-0.5px">Priority allocations with Dubai's most coveted names.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(201,162,75,0.12);border:1px solid rgba(201,162,75,0.12)">
+        <sc-for list="{{ developers }}" as="d" hint-placeholder-count="6">
+          <div style="background:#0A0A0C;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px 12px">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2vw,26px);letter-spacing:3px;color:#B8B3A6;text-align:center">{{ d.name }}</span>
+            <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#5f5b52">{{ d.note }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI CALCULATOR -->
+  <section id="calculator" style="position:relative;overflow:hidden;background:radial-gradient(100% 80% at 80% 0%,#16130d,#0A0A0C 60%)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,150px) clamp(24px,5vw,72px)">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+        <span style="width:46px;height:1px;background:#C9A24B"></span>
+        <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">Investment Calculator</span>
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.6vw,64px);line-height:1.04;color:#F4F1EA;letter-spacing:-0.5px;max-width:18ch">Model your returns in real time.</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 0.9fr;gap:clamp(28px,4vw,64px);margin-top:clamp(46px,5vw,70px);align-items:start">
+        <!-- INPUTS -->
+        <div style="display:flex;flex-direction:column;gap:38px">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+              <label style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8B3A6">Property Price</label>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#E8D29A">{{ priceLabel }}</span>
+            </div>
+            <input type="range" min="1000000" max="50000000" step="250000" value="{{ price }}" onInput="{{ onPrice }}" style="width:100%">
+            <div style="display:flex;justify-content:space-between;margin-top:8px"><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">AED 1M</span><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">AED 50M</span></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+              <label style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8B3A6">Annual Rental Yield</label>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#E8D29A">{{ yieldLabel }}</span>
+            </div>
+            <input type="range" min="3" max="12" step="0.1" value="{{ yieldPct }}" onInput="{{ onYield }}" style="width:100%">
+            <div style="display:flex;justify-content:space-between;margin-top:8px"><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">3%</span><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">12%</span></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+              <label style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8B3A6">Annual Appreciation</label>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#E8D29A">{{ apprLabel }}</span>
+            </div>
+            <input type="range" min="0" max="15" step="0.1" value="{{ apprPct }}" onInput="{{ onAppr }}" style="width:100%">
+            <div style="display:flex;justify-content:space-between;margin-top:8px"><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">0%</span><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">15%</span></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
+              <label style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8B3A6">Holding Period</label>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:26px;color:#E8D29A">{{ yearsLabel }}</span>
+            </div>
+            <input type="range" min="1" max="20" step="1" value="{{ years }}" onInput="{{ onYears }}" style="width:100%">
+            <div style="display:flex;justify-content:space-between;margin-top:8px"><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">1 yr</span><span style="font-size:10px;letter-spacing:1px;color:#5f5b52">20 yrs</span></div>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div style="background:linear-gradient(165deg,#13110c,#0A0A0C);border:1px solid rgba(201,162,75,0.25);border-radius:4px;padding:clamp(30px,3vw,44px)">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8E897C">Projected total return over {{ yearsLabel }}</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,62px);line-height:1;color:#E8D29A;margin-top:10px;background:linear-gradient(100deg,#F3E4B8,#C9A24B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">{{ totalReturnLabel }}</div>
+          <div style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 14px;border:1px solid rgba(201,162,75,0.3);border-radius:2px">
+            <span style="font-size:12px;letter-spacing:1px;color:#B8B3A6">Total ROI</span>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#E8D29A">{{ roiPctLabel }}</span>
+          </div>
+
+          <div style="margin-top:34px;display:flex;flex-direction:column;gap:1px;background:rgba(201,162,75,0.14);border:1px solid rgba(201,162,75,0.14);border-radius:3px;overflow:hidden">
+            <div style="background:#0C0C0E;padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:13px;color:#B8B3A6;font-weight:300">Annual rental income</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:21px;color:#F2EEE6">{{ annualRentLabel }}</span>
+            </div>
+            <div style="background:#0C0C0E;padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:13px;color:#B8B3A6;font-weight:300">Rental income · {{ yearsLabel }}</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:21px;color:#F2EEE6">{{ totalRentLabel }}</span>
+            </div>
+            <div style="background:#0C0C0E;padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:13px;color:#B8B3A6;font-weight:300">Capital appreciation</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:21px;color:#F2EEE6">{{ capGainLabel }}</span>
+            </div>
+            <div style="background:#100E0B;padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:13px;color:#E8D29A;font-weight:400">Projected property value</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:23px;color:#E8D29A">{{ projValueLabel }}</span>
+            </div>
+          </div>
+          <a href="#contact" style="text-decoration:none;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:26px;padding:16px;background:linear-gradient(100deg,#E8D29A,#C9A24B);color:#0C0C0E;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;border-radius:2px">Discuss this scenario with Salah</a>
+          <p style="font-size:11px;line-height:1.6;color:#5f5b52;font-weight:300;margin-top:16px">Estimates only. Rental income shown gross of fees; appreciation compounds annually. Not financial advice.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE -->
+  <section style="max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,150px) clamp(24px,5vw,72px)">
+    <div style="text-align:center;max-width:62ch;margin:0 auto clamp(40px,5vw,64px)">
+      <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">The Life</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.6vw,64px);line-height:1.04;color:#F4F1EA;margin-top:18px;letter-spacing:-0.5px">More than an asset. A way of living.</h2>
+      <p style="margin-top:22px;font-size:16px;line-height:1.8;color:#8E897C;font-weight:300">Marina sunsets, Michelin tables, world-class schools and year-round sun — Dubai delivers a lifestyle that justifies the investment on its own.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:220px 220px;gap:clamp(14px,1.6vw,22px)">
+      <image-slot id="life-1" style="grid-row:span 2;width:100%;height:100%;display:block" shape="rounded" radius="3" placeholder="Beachfront / skyline"></image-slot>
+      <image-slot id="life-2" style="width:100%;height:100%;display:block" shape="rounded" radius="3" placeholder="Fine dining"></image-slot>
+      <image-slot id="life-3" style="width:100%;height:100%;display:block" shape="rounded" radius="3" placeholder="Marina / yacht"></image-slot>
+      <image-slot id="life-4" style="width:100%;height:100%;display:block" shape="rounded" radius="3" placeholder="Interiors"></image-slot>
+      <image-slot id="life-5" style="width:100%;height:100%;display:block" shape="rounded" radius="3" placeholder="Golf / wellness"></image-slot>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="background:linear-gradient(180deg,#0A0A0C,#100E0B);border-top:1px solid rgba(201,162,75,0.12)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(80px,11vw,150px) clamp(24px,5vw,72px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:center">
+      <div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+          <span style="width:46px;height:1px;background:#C9A24B"></span>
+          <span style="font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#C9A24B">Private Consultation</span>
+        </div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.8vw,66px);line-height:1.02;color:#F4F1EA;letter-spacing:-0.5px">Let's find your<br>position in the market.</h2>
+        <p style="margin-top:26px;font-size:17px;line-height:1.8;color:#B8B3A6;font-weight:300;max-width:48ch">Share a few details and Salah will personally prepare a shortlist and a tailored return projection — no obligation, complete discretion.</p>
+        <div style="margin-top:40px;display:flex;flex-direction:column;gap:18px">
+          <a href="https://wa.me/971523243294" style="text-decoration:none;display:inline-flex;align-items:center;gap:14px;color:#F2EEE6;font-size:15px"><span style="width:38px;height:38px;border:1px solid rgba(201,162,75,0.4);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#C9A24B">✆</span>+971 52 324 3294</a>
+          <a href="mailto:salah@uniqueproperties.ae" style="text-decoration:none;display:inline-flex;align-items:center;gap:14px;color:#F2EEE6;font-size:15px"><span style="width:38px;height:38px;border:1px solid rgba(201,162,75,0.4);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#C9A24B">✉</span>salah@uniqueproperties.ae</a>
+        </div>
+      </div>
+
+      <div style="background:#0C0C0E;border:1px solid rgba(201,162,75,0.2);border-radius:4px;padding:clamp(28px,3vw,44px)">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div>
+            <label style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8E897C;display:block;margin-bottom:10px">Full Name</label>
+            <input value="{{ cname }}" onInput="{{ onName }}" placeholder="Your name" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,162,75,0.25);padding:10px 0;color:#F2EEE6;font-size:16px;outline:none">
+          </div>
+          <div>
+            <label style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8E897C;display:block;margin-bottom:10px">Investment Budget</label>
+            <input value="{{ cbudget }}" onInput="{{ onBudget }}" placeholder="e.g. AED 5,000,000" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,162,75,0.25);padding:10px 0;color:#F2EEE6;font-size:16px;outline:none">
+          </div>
+          <div>
+            <label style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8E897C;display:block;margin-bottom:10px">What are you looking for?</label>
+            <textarea value="{{ cmsg }}" onInput="{{ onMsg }}" placeholder="Villa, branded residence, off-plan, rental income, capital growth…" rows="3" style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,162,75,0.25);padding:10px 0;color:#F2EEE6;font-size:16px;outline:none;resize:none;line-height:1.6"></textarea>
+          </div>
+          <button onClick="{{ sendWhatsApp }}" style="margin-top:6px;width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:17px;background:linear-gradient(100deg,#E8D29A,#C9A24B);color:#0C0C0E;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;border:none;border-radius:2px;cursor:pointer">Send via WhatsApp</button>
+          <button onClick="{{ sendEmail }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:15px;background:transparent;color:#E8D29A;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:1px solid rgba(201,162,75,0.4);border-radius:2px;cursor:pointer">Or send by Email</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0A0A0C;border-top:1px solid rgba(201,162,75,0.12)">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(46px,6vw,72px) clamp(24px,5vw,72px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;letter-spacing:3px;color:#F2EEE6">SALAH</span>
+        <span style="width:1px;height:18px;background:rgba(201,162,75,0.4)"></span>
+        <span style="font-size:10px;letter-spacing:3px;color:#C9A24B;text-transform:uppercase">Private Estates · Dubai</span>
+      </div>
+      <span style="font-size:12px;letter-spacing:1px;color:#5f5b52">© 2026&nbsp;Salah Private Estates. RERA-registered advisory. All figures indicative.</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    price: 5000000,
+    yieldPct: 7,
+    apprPct: 8,
+    years: 5,
+    cname: '',
+    cbudget: '',
+    cmsg: ''
+  };
+
+  componentDidMount() {
+    const root = this._rootEl();
+    if (!root) { setTimeout(() => this.componentDidMount(), 60); return; }
+
+    // ---- Scroll reveals ----
+    const selectors = [
+      'section [style*="grid-template-columns"]',
+      'section h2', 'section h3',
+      'section > div > p', 'section > div > div > p',
+      'section img',
+      'footer > div'
+    ];
+    const seen = new Set();
+    const targets = [];
+    selectors.forEach(sel => root.querySelectorAll(sel).forEach(el => {
+      if (seen.has(el)) return;
+      // skip elements nested inside an already-collected ancestor target
+      if (targets.some(t => t.contains(el))) return;
+      seen.add(el);
+      targets.push(el);
+    }));
+    targets.forEach(el => el.classList.add('rv'));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const sibs = Array.from(el.parentElement ? el.parentElement.children : [el]).filter(n => n.classList.contains('rv'));
+        const idx = Math.max(0, sibs.indexOf(el));
+        setTimeout(() => el.classList.add('in'), Math.min(idx, 6) * 90);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(el => io.observe(el));
+    this._io = io;
+
+    // reveal anything already in view on load (hero) next frame
+    requestAnimationFrame(() => {
+      targets.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.9) el.classList.add('in');
+      });
+    });
+
+    // ---- Hero parallax + nav state ----
+    const heroBg = root.querySelector('#hero-bg');
+    const nav = root.querySelector('nav');
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset;
+      if (heroBg && y < window.innerHeight) heroBg.style.transform = 'translateY(' + (y * 0.18) + 'px) scale(1.06)';
+      if (nav) nav.classList.toggle('nav-scrolled', y > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this._onScroll = onScroll;
+    onScroll();
+  }
+
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+
+  _rootEl() {
+    const h1 = document.querySelector('#top h1');
+    return h1 ? h1.closest('div[style*="font-family"]') || document.querySelector('x-dc') : null;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const fmtAED = (n) => {
+      const v = Math.round(n);
+      if (Math.abs(v) >= 1000000) return 'AED ' + (v / 1000000).toFixed(2).replace(/\.?0+$/, '') + 'M';
+      return 'AED ' + v.toLocaleString('en-US');
+    };
+    const annualRent = s.price * s.yieldPct / 100;
+    const totalRent = annualRent * s.years;
+    const projValue = s.price * Math.pow(1 + s.apprPct / 100, s.years);
+    const capGain = projValue - s.price;
+    const totalReturn = totalRent + capGain;
+    const roiPct = (totalReturn / s.price) * 100;
+
+    const waNumber = '971523243294';
+    const buildMsg = () =>
+      `Hello Salah, I'm ${s.cname || '[name]'}. I'm interested in investing in Dubai property.\n` +
+      `Budget: ${s.cbudget || '[budget]'}.\n` +
+      `Looking for: ${s.cmsg || '[details]'}.`;
+
+    return {
+      villas: [
+        { slot: 'villa-1', placeholder: 'The Alba — Palm Jumeirah', tag: 'Signature', area: 'Palm Jumeirah', name: 'The Alba by Omniyat', specs: '3 Beds · 5,404 sqft · Private beach', price: 'AED 51M' },
+        { slot: 'villa-2', placeholder: 'Jacob & Co Residences', tag: 'Branded', area: 'Business Bay', name: 'Jacob & Co Residences', specs: '3 Beds · 3,263 sqft', price: 'AED 15M' },
+        { slot: 'villa-3', placeholder: 'Lunaya villa', tag: 'Villa', area: 'Dubai', name: 'Lunaya', specs: '4 Bed Villa · 3,831 sqft · Luxury community', price: 'AED 6.8M' },
+        { slot: 'villa-4', placeholder: 'Grand Polo Club & Resort', tag: 'Villa', area: 'Grand Polo Club & Resort', name: 'Grand Polo Club & Resort', specs: '5 Bed Villa · 8,635 sqft', price: 'AED 18.8M' }
+      ],
+      developers: [
+        { name: 'EMAAR', note: 'Downtown · Hills' },
+        { name: 'OMNIYAT', note: 'Ultra-prime' },
+        { name: 'MERAAS', note: 'Waterfront' },
+        { name: 'NAKHEEL', note: 'The Palm' },
+        { name: 'SOBHA', note: 'Hartland' },
+        { name: 'ELLINGTON', note: 'Design-led' }
+      ],
+      price: s.price,
+      yieldPct: s.yieldPct,
+      apprPct: s.apprPct,
+      years: s.years,
+      priceLabel: fmtAED(s.price),
+      yieldLabel: s.yieldPct.toFixed(1) + '%',
+      apprLabel: s.apprPct.toFixed(1) + '%',
+      yearsLabel: s.years + (s.years === 1 ? ' Year' : ' Years'),
+      annualRentLabel: fmtAED(annualRent),
+      totalRentLabel: fmtAED(totalRent),
+      capGainLabel: fmtAED(capGain),
+      projValueLabel: fmtAED(projValue),
+      totalReturnLabel: fmtAED(totalReturn),
+      roiPctLabel: Math.round(roiPct) + '%',
+      onPrice: (e) => this.setState({ price: +e.target.value }),
+      onYield: (e) => this.setState({ yieldPct: +e.target.value }),
+      onAppr: (e) => this.setState({ apprPct: +e.target.value }),
+      onYears: (e) => this.setState({ years: +e.target.value }),
+      cname: s.cname,
+      cbudget: s.cbudget,
+      cmsg: s.cmsg,
+      onName: (e) => this.setState({ cname: e.target.value }),
+      onBudget: (e) => this.setState({ cbudget: e.target.value }),
+      onMsg: (e) => this.setState({ cmsg: e.target.value }),
+      sendWhatsApp: () => {
+        window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(buildMsg()), '_blank');
+      },
+      sendEmail: () => {
+        const subject = 'Dubai Investment Enquiry';
+        window.location.href = 'mailto:salah@uniqueproperties.ae?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(buildMsg());
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
