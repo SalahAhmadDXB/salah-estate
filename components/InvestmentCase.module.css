@@ -1,0 +1,218 @@
+.section {
+  background: linear-gradient(180deg, #0a0a0c, #100e0b 60%, #0a0a0c);
+  border-top: 1px solid rgba(201, 162, 75, 0.12);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.12);
+}
+.inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: clamp(80px, 11vw, 150px) var(--pad-x);
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+.headerLeft {
+  max-width: 46ch;
+}
+.heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1.04;
+  color: var(--cream-bright);
+  letter-spacing: -0.5px;
+  margin-top: 24px;
+}
+.headerBody {
+  max-width: 40ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--dim);
+  font-weight: 300;
+  align-self: flex-end;
+}
+
+/* ── Pillars grid ── */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(201, 162, 75, 0.14);
+  border: 1px solid rgba(201, 162, 75, 0.14);
+}
+.pillar {
+  background: var(--bg);
+  padding: 38px 30px;
+}
+.pillarValue {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5vw, 68px);
+  color: var(--gold-light);
+  line-height: 0.95;
+}
+.pillarTitle {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 14px;
+  font-weight: 500;
+}
+.pillarBody {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--dimmer);
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+/* ── Charts row ── */
+.charts {
+  margin-top: 1px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1px;
+  background: rgba(201, 162, 75, 0.14);
+  border: 1px solid rgba(201, 162, 75, 0.14);
+  border-top: none;
+}
+.chartBar {
+  background: var(--bg);
+  padding: clamp(34px, 4vw, 52px);
+}
+.chartLabel {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 34px;
+}
+
+/* ── Bars ── */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(10px, 2vw, 26px);
+  height: 230px;
+}
+.barCol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  justify-content: flex-end;
+}
+.barIndex {
+  font-size: 13px;
+  color: var(--dim);
+}
+.barIndexPeak {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--gold-light);
+}
+.bar {
+  width: 100%;
+  border-radius: 1px 1px 0 0;
+}
+.bar_dim {
+  background: linear-gradient(180deg, #3a352a, #1c1a15);
+  border-top: 2px solid #6f6a5e;
+}
+.bar_mid {
+  background: linear-gradient(180deg, #4a4230, #221f17);
+  border-top: 2px solid #8a7f5a;
+}
+.bar_bright {
+  background: linear-gradient(180deg, #9a7f3e, #3a2f17);
+  border-top: 2px solid var(--gold);
+}
+.bar_peak {
+  background: linear-gradient(180deg, var(--gold-light), #9a7f3e 60%, #3a2f17);
+  border-top: 2px solid var(--gold-light);
+  box-shadow: 0 0 24px rgba(201, 162, 75, 0.25);
+}
+.barYear {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--dimmer);
+}
+.barYearPeak {
+  color: var(--gold);
+}
+
+/* ── Metrics ── */
+.metrics {
+  background: var(--bg);
+  padding: clamp(34px, 4vw, 52px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+.metric {}
+.metricRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+.metricLabel {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+.metricValue {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--gold-light);
+}
+.metricTrack {
+  height: 5px;
+  background: rgba(201, 162, 75, 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.metricFill {
+  height: 100%;
+  background: linear-gradient(90deg, #9a7f3e, var(--gold-light));
+  border-radius: 3px;
+}
+.disclaimer {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--darkest);
+  font-weight: 300;
+  margin-top: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .pillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+  .header {
+    flex-direction: column;
+  }
+  .headerBody {
+    max-width: 100%;
+  }
+}

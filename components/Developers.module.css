@@ -1,0 +1,84 @@
+.section {
+  background: var(--bg-alt);
+  border-top: 1px solid rgba(201, 162, 75, 0.12);
+  border-bottom: 1px solid rgba(201, 162, 75, 0.12);
+}
+.inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: clamp(70px, 8vw, 110px) var(--pad-x);
+}
+.header {
+  text-align: center;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.1;
+  color: var(--cream-bright);
+  margin-top: 18px;
+  letter-spacing: -0.5px;
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: rgba(201, 162, 75, 0.12);
+  border: 1px solid rgba(201, 162, 75, 0.12);
+}
+.cell {
+  background: var(--bg-alt);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 12px;
+  transition: background 0.3s;
+}
+.cell:hover {
+  background: rgba(201, 162, 75, 0.04);
+}
+.devName {
+  font-family: var(--font-serif);
+  font-size: clamp(16px, 1.8vw, 24px);
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-align: center;
+  transition: color 0.3s;
+}
+.cell:hover .devName {
+  color: var(--gold-light);
+}
+.devNote {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--darkest);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

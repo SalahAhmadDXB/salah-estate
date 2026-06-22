@@ -1,0 +1,206 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 150px 0 100px;
+  background: radial-gradient(120% 90% at 70% 10%, #1b1813 0%, #0c0c0e 55%);
+}
+
+/* ── Parallax bg placeholder ── */
+.bg {
+  position: absolute;
+  inset: -8%;
+  background:
+    radial-gradient(ellipse 80% 60% at 65% 40%, rgba(201, 162, 75, 0.06) 0%, transparent 60%),
+    linear-gradient(135deg, #1a1610 0%, #0e0c0a 40%, #0c0c0e 100%);
+  will-change: transform;
+}
+
+/* ── Overlay gradients ── */
+.overlayH {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 12, 14, 0.92) 0%,
+    rgba(12, 12, 14, 0.7) 45%,
+    rgba(12, 12, 14, 0.35) 100%
+  );
+}
+.overlayV {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 14, 0.5) 0%,
+    transparent 25%,
+    transparent 65%,
+    rgba(12, 12, 14, 0.95) 100%
+  );
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--pad-x);
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.eyebrowLine {
+  width: 46px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.eyebrowText {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+/* ── Headline ── */
+.headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(44px, 7vw, 108px);
+  line-height: 0.98;
+  letter-spacing: -1px;
+  color: var(--cream-bright);
+  max-width: 14ch;
+  font-style: normal;
+}
+.headlineGold {
+  font-style: italic;
+  background: linear-gradient(100deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Subheading ── */
+.sub {
+  margin-top: 30px;
+  max-width: 54ch;
+  font-size: clamp(15px, 1.4vw, 19px);
+  line-height: 1.7;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* ── CTA buttons ── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 42px;
+}
+.btnPrimary {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 34px;
+  background: linear-gradient(100deg, var(--gold-light), var(--gold));
+  color: var(--bg);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.btnPrimary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+.btnSecondary {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 34px;
+  border: 1px solid rgba(242, 238, 230, 0.25);
+  color: var(--cream);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+.btnSecondary:hover {
+  background: rgba(242, 238, 230, 0.05);
+  border-color: rgba(242, 238, 230, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ── Scroll cue ── */
+.scrollCue {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+.scrollLabel {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #6f6a5e;
+}
+.scrollTrack {
+  width: 1px;
+  height: 42px;
+  background: rgba(201, 162, 75, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.scrollDot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 14px;
+  background: var(--gold);
+  animation: scrollcue 1.8s ease-in-out infinite;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .hero {
+    padding: 130px 0 80px;
+    align-items: flex-end;
+  }
+  .headline {
+    max-width: 100%;
+  }
+  .actions {
+    flex-direction: column;
+  }
+  .btnPrimary,
+  .btnSecondary {
+    justify-content: center;
+    width: 100%;
+  }
+}
