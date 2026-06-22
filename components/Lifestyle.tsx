@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './Lifestyle.module.css';
 
@@ -7,28 +8,33 @@ const slots = [
   {
     id: 1,
     label: 'Beachfront',
-    gradient: 'linear-gradient(135deg, #0f2236 0%, #1a3a5c 50%, #0c1e33 100%)',
+    image:
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=85&auto=format&fit=crop',
     span: 'row',
   },
   {
     id: 2,
     label: 'Fine Dining',
-    gradient: 'linear-gradient(135deg, #1a1006 0%, #2d1e08 50%, #1a1208 100%)',
+    image:
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=85&auto=format&fit=crop',
   },
   {
     id: 3,
     label: 'Marina & Yachts',
-    gradient: 'linear-gradient(135deg, #0a1628 0%, #0f2a42 50%, #0c1e33 100%)',
+    image:
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&q=85&auto=format&fit=crop',
   },
   {
     id: 4,
     label: 'Luxury Interiors',
-    gradient: 'linear-gradient(135deg, #1a1208 0%, #1e150a 50%, #141008 100%)',
+    image:
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=85&auto=format&fit=crop',
   },
   {
     id: 5,
     label: 'Golf & Wellness',
-    gradient: 'linear-gradient(135deg, #0f1a0d 0%, #162314 50%, #0d1a0b 100%)',
+    image:
+      'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=900&q=85&auto=format&fit=crop',
   },
 ];
 
@@ -51,9 +57,15 @@ export default function Lifestyle() {
           <div
             key={s.id}
             className={`${styles.slot} ${s.span === 'row' ? styles.slotTall : ''}`}
-            style={{ background: s.gradient }}
             aria-label={s.label}
           >
+            <Image
+              src={s.image}
+              alt={s.label}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
             <div className={styles.slotGlow} />
             <span className={styles.slotLabel}>{s.label}</span>
           </div>

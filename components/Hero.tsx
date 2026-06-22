@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -20,7 +21,16 @@ export default function Hero() {
   return (
     <section id="top" className={styles.hero}>
       {/* Parallax background */}
-      <div ref={bgRef} className={styles.bg} />
+      <div ref={bgRef} className={styles.bg}>
+        <Image
+          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85&auto=format&fit=crop"
+          alt=""
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
+          sizes="100vw"
+        />
+      </div>
 
       {/* Gradient overlays */}
       <div className={styles.overlayH} />

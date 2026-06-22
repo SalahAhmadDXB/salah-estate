@@ -57,15 +57,19 @@
 .slotGlow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 80%, rgba(201, 162, 75, 0.08), transparent 60%);
+  background:
+    radial-gradient(ellipse at 30% 80%, rgba(201, 162, 75, 0.08), transparent 60%),
+    linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
   pointer-events: none;
+  z-index: 1;
 }
 .slotLabel {
   position: relative;
+  z-index: 2;
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(201, 162, 75, 0.5);
+  color: rgba(242, 238, 230, 0.75);
   font-weight: 400;
 }
 

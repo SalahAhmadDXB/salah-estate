@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './Portfolio.module.css';
 
@@ -11,7 +12,8 @@ const villas = [
     name: 'The Alba by Omniyat',
     specs: '3 Beds · 5,404 sqft · Private beach',
     price: 'AED 51M',
-    gradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+    image:
+      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 2,
@@ -20,7 +22,8 @@ const villas = [
     name: 'Jacob & Co Residences',
     specs: '3 Beds · 3,263 sqft',
     price: 'AED 15M',
-    gradient: 'linear-gradient(135deg, #1a1006 0%, #2a1d0a 50%, #1a1208 100%)',
+    image:
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 3,
@@ -29,7 +32,8 @@ const villas = [
     name: 'Lunaya',
     specs: '4 Bed Villa · 3,831 sqft · Luxury community',
     price: 'AED 6.8M',
-    gradient: 'linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a1a2e 100%)',
+    image:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85&auto=format&fit=crop',
   },
   {
     id: 4,
@@ -38,7 +42,8 @@ const villas = [
     name: 'Grand Polo Club & Resort',
     specs: '5 Bed Villa · 8,635 sqft',
     price: 'AED 18.8M',
-    gradient: 'linear-gradient(135deg, #0f1a0d 0%, #162312 50%, #0d1a0b 100%)',
+    image:
+      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=85&auto=format&fit=crop',
   },
 ];
 
@@ -63,10 +68,15 @@ export default function Portfolio() {
       <div className={styles.grid}>
         {villas.map((v) => (
           <a key={v.id} href="#contact" className={`${styles.card} rv`}>
-            <div className={styles.cardImg} style={{ background: v.gradient }}>
+            <div className={styles.cardImg}>
+              <Image
+                src={v.image}
+                alt={v.name}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               <div className={styles.cardImgOverlay} />
-              {/* Decorative elements */}
-              <div className={styles.cardPattern} />
             </div>
             <div className={styles.cardOverlay} />
             <div className={styles.cardContent}>
