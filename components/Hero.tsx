@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './Hero.module.css';
 
 // Local hero video (Dubai drone footage, 4.8MB)
@@ -9,6 +10,7 @@ const VIDEO_URL = '/videos/hero.mp4';
 
 export default function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
+  const contentRef = useScrollReveal<HTMLDivElement>();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function Hero() {
           loop
           playsInline
           className={styles.video}
-          poster="/images/villa-grandpolo.jpg"
+          poster="/images/hero-bg.jpg"
           preload="auto"
         >
           <source src={VIDEO_URL} type="video/mp4" />
@@ -44,7 +46,7 @@ export default function Hero() {
       <div className={styles.overlayV} />
 
       {/* Content */}
-      <div className={styles.content}>
+      <div ref={contentRef} className={styles.content}>
         <div className={`${styles.eyebrow} rv`}>
           <span className={styles.eyebrowLine} />
           <span className={styles.eyebrowText}>{t.hero.eyebrow}</span>
