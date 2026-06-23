@@ -198,7 +198,7 @@
 @media (max-width: 600px) {
   .hero {
     padding: 130px 0 80px;
-    align-items: flex-end;
+    align-items: center;
   }
   .headline {
     max-width: 100%;
