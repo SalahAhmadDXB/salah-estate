@@ -1,36 +1,8 @@
 'use client';
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './InvestmentCase.module.css';
-
-const pillars = [
-  {
-    value: '0%',
-    title: 'Income & Capital Gains Tax',
-    body: 'Keep 100% of your rental yield and resale profit.',
-  },
-  {
-    value: '6–9%',
-    title: 'Typical Net Rental Yields',
-    body: 'Among the highest of any global prime market.',
-  },
-  {
-    value: '100%',
-    title: 'Foreign Freehold Ownership',
-    body: 'Full ownership in designated freehold zones.',
-  },
-  {
-    value: '10yr',
-    title: 'Golden Visa from AED 2M',
-    body: 'Long-term residency for you and your family.',
-  },
-];
-
-const metrics = [
-  { label: 'Population growth 2024', value: '+5.2%', pct: 62 },
-  { label: 'Annual tourist arrivals', value: '18.7M', pct: 84 },
-  { label: 'Transaction volume YoY', value: '+23%', pct: 74 },
-];
 
 const bars = [
   { year: '2020', index: 100, height: '46%', shade: 'dim' },
@@ -39,31 +11,26 @@ const bars = [
   { year: '2025', index: '190+', height: '100%', shade: 'peak' },
 ];
 
+const metricPcts = [62, 84, 74];
+
 export default function InvestmentCase() {
   const ref = useScrollReveal<HTMLElement>();
+  const { t } = useTranslation();
+  const { invest } = t;
 
   return (
     <section id="invest" ref={ref} className={styles.section}>
       <div className={styles.inner}>
-        {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <div className={`section-label rv`}>
-              <span>The Investment Case</span>
-            </div>
-            <h2 className={`${styles.heading} rv`}>
-              Why the world&apos;s capital is moving to Dubai.
-            </h2>
+            <div className="section-label rv"><span>{invest.label}</span></div>
+            <h2 className={`${styles.heading} rv`}>{invest.heading}</h2>
           </div>
-          <p className={`${styles.headerBody} rv`}>
-            A rare combination of zero tax, political stability, and structural growth has
-            made Dubai the most compelling property market on earth.
-          </p>
+          <p className={`${styles.headerBody} rv`}>{invest.body}</p>
         </div>
 
-        {/* 4-pillar grid */}
         <div className={`${styles.pillars} rv`}>
-          {pillars.map((p) => (
+          {invest.pillars.map((p) => (
             <div key={p.title} className={styles.pillar}>
               <div className={styles.pillarValue}>{p.value}</div>
               <div className={styles.pillarTitle}>{p.title}</div>
@@ -72,13 +39,9 @@ export default function InvestmentCase() {
           ))}
         </div>
 
-        {/* Charts row */}
         <div className={`${styles.charts} rv`}>
-          {/* Bar chart */}
           <div className={styles.chartBar}>
-            <div className={styles.chartLabel}>
-              Prime Residential Price Index — indexed to 100
-            </div>
+            <div className={styles.chartLabel}>{invest.chartLabel}</div>
             <div className={styles.bars}>
               {bars.map((b) => (
                 <div key={b.year} className={styles.barCol}>
@@ -97,23 +60,19 @@ export default function InvestmentCase() {
             </div>
           </div>
 
-          {/* Metric bars */}
           <div className={styles.metrics}>
-            {metrics.map((m) => (
+            {invest.metrics.map((m, i) => (
               <div key={m.label} className={styles.metric}>
                 <div className={styles.metricRow}>
                   <span className={styles.metricLabel}>{m.label}</span>
                   <span className={styles.metricValue}>{m.value}</span>
                 </div>
                 <div className={styles.metricTrack}>
-                  <div className={styles.metricFill} style={{ width: `${m.pct}%` }} />
+                  <div className={styles.metricFill} style={{ width: `${metricPcts[i]}%` }} />
                 </div>
               </div>
             ))}
-            <p className={styles.disclaimer}>
-              Figures are indicative market context for illustration. Salah will share
-              verified, current data for your specific opportunity.
-            </p>
+            <p className={styles.disclaimer}>{invest.disclaimer}</p>
           </div>
         </div>
       </div>

@@ -46,6 +46,29 @@ button {
   font-family: inherit;
 }
 
+/* Arabic font activation */
+[lang="ar"] body,
+[lang="ar"] input,
+[lang="ar"] textarea,
+[lang="ar"] button {
+  font-family: var(--font-arabic), 'Noto Sans Arabic', sans-serif;
+}
+[lang="ar"] .section-label span {
+  letter-spacing: 0;
+}
+
+/* RTL nav mobile drawer */
+[dir="rtl"] .navLinks {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid rgba(201, 162, 75, 0.15);
+  transform: translateX(-100%);
+}
+[dir="rtl"] .navLinksOpen {
+  transform: translateX(0);
+}
+
 /* ── Range inputs ── */
 input[type='range'] {
   -webkit-appearance: none;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './Developers.module.css';
 
 const developers = [
@@ -18,15 +19,14 @@ const developers = [
 
 export default function Developers() {
   const ref = useScrollReveal<HTMLElement>();
+  const { t } = useTranslation();
 
   return (
     <section ref={ref} className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.header}>
-          <span className={`${styles.label} rv`}>Direct Developer Access</span>
-          <h2 className={`${styles.heading} rv`}>
-            Priority allocations with Dubai&apos;s most coveted names.
-          </h2>
+          <span className={`${styles.label} rv`}>{t.developers.label}</span>
+          <h2 className={`${styles.heading} rv`}>{t.developers.heading}</h2>
         </div>
         <div className={`${styles.grid} rv`}>
           {developers.map((d) => (

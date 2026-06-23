@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './Contact.module.css';
 
 const WA_NUMBER = '971523243294';
@@ -19,6 +20,9 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function Contact() {
   const ref = useScrollReveal<HTMLElement>();
+  const { t } = useTranslation();
+  const c = t.contact;
+
   const [name, setName] = useState('');
   const [budget, setBudget] = useState('');
   const [msg, setMsg] = useState('');
@@ -50,21 +54,23 @@ export default function Contact() {
     }
   }, [name, budget, msg, status]);
 
+  const emailBtnText =
+    status === 'sending' ? c.btnEmailSending
+    : status === 'sent' ? c.btnEmailSent
+    : status === 'error' ? c.btnEmailError
+    : c.btnEmailIdle;
+
   return (
     <section id="contact" ref={ref} className={styles.section}>
       <div className={styles.inner}>
-        {/* Left col */}
         <div className={styles.left}>
-          <div className={`section-label rv`}>
-            <span>Private Consultation</span>
-          </div>
+          <div className="section-label rv"><span>{c.label}</span></div>
           <h2 className={`${styles.heading} rv`}>
-            Let&apos;s find your<br />position in the market.
+            {c.heading.split('\n').map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
           </h2>
-          <p className={`${styles.body} rv`}>
-            Share a few details and Salah will personally prepare a shortlist and a
-            tailored return projection — no obligation, complete discretion.
-          </p>
+          <p className={`${styles.body} rv`}>{c.body}</p>
           <div className={`${styles.contactLinks} rv`}>
             <a
               href={`https://wa.me/${WA_NUMBER}`}
@@ -82,40 +88,39 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Right col — form */}
         <div className={`${styles.form} rv`}>
           <div className={styles.field}>
-            <label className={styles.fieldLabel}>Full Name</label>
+            <label className={styles.fieldLabel}>{c.nameLabel}</label>
             <input
               className={styles.input}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
+              placeholder={c.namePlaceholder}
               autoComplete="name"
             />
           </div>
           <div className={styles.field}>
-            <label className={styles.fieldLabel}>Investment Budget</label>
+            <label className={styles.fieldLabel}>{c.budgetLabel}</label>
             <input
               className={styles.input}
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
-              placeholder="e.g. AED 5,000,000"
+              placeholder={c.budgetPlaceholder}
             />
           </div>
           <div className={styles.field}>
-            <label className={styles.fieldLabel}>What are you looking for?</label>
+            <label className={styles.fieldLabel}>{c.messageLabel}</label>
             <textarea
               className={styles.textarea}
               value={msg}
               onChange={(e) => setMsg(e.target.value)}
-              placeholder="Villa, branded residence, off-plan, rental income, capital growth…"
+              placeholder={c.messagePlaceholder}
               rows={4}
             />
           </div>
 
           <button className={styles.btnWA} onClick={sendWhatsApp} type="button">
-            <span>Send via WhatsApp</span>
+            <span>{c.btnWA}</span>
           </button>
 
           <button
@@ -124,13 +129,7 @@ export default function Contact() {
             type="button"
             disabled={status === 'sending'}
           >
-            {status === 'sending'
-              ? 'Sending…'
-              : status === 'sent'
-              ? 'Message sent ✓'
-              : status === 'error'
-              ? 'Something went wrong — try again'
-              : 'Or send by Email'}
+            {emailBtnText}
           </button>
         </div>
       </div>

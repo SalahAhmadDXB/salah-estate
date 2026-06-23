@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './Portfolio.module.css';
 
 const villas = [
@@ -45,20 +46,17 @@ const villas = [
 
 export default function Portfolio() {
   const ref = useScrollReveal<HTMLElement>();
+  const { t } = useTranslation();
+  const { portfolio } = t;
 
   return (
     <section id="portfolio" ref={ref} className={styles.section}>
       <div className={styles.header}>
         <div>
-          <div className={`section-label rv`}>
-            <span>Selected Portfolio</span>
-          </div>
-          <h2 className={`${styles.heading} rv`}>Villas &amp; branded residences.</h2>
+          <div className="section-label rv"><span>{portfolio.label}</span></div>
+          <h2 className={`${styles.heading} rv`}>{portfolio.heading}</h2>
         </div>
-        <p className={`${styles.headerBody} rv`}>
-          A rotating selection of off-market and signature listings, curated for serious
-          buyers.
-        </p>
+        <p className={`${styles.headerBody} rv`}>{portfolio.body}</p>
       </div>
 
       <div className={styles.grid}>

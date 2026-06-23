@@ -12,9 +12,18 @@
 .bg {
   position: absolute;
   inset: -8%;
-  background: #0c0c0e;
+  background: #0c0c0e url('/images/villa-grandpolo.jpg') center/cover no-repeat;
   will-change: transform;
   overflow: hidden;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* ── Overlay gradients ── */

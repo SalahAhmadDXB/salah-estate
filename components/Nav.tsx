@@ -1,15 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
+import LanguageSwitcher from './LanguageSwitcher';
 import styles from './Nav.module.css';
 
-const navLinks = [
-  { href: '#invest', label: 'Why Dubai' },
-  { href: '#portfolio', label: 'Portfolio' },
-  { href: '#calculator', label: 'ROI Calculator' },
-];
-
 export default function Nav() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -20,13 +17,18 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
   const close = () => setOpen(false);
+
+  const navLinks = [
+    { href: '#invest', label: t.nav.whyDubai },
+    { href: '#portfolio', label: t.nav.portfolio },
+    { href: '#calculator', label: t.nav.calculator },
+  ];
 
   return (
     <>
@@ -43,8 +45,9 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
+          <LanguageSwitcher />
           <a href="#contact" className={styles.cta} onClick={close}>
-            Book a Consultation
+            {t.nav.book}
           </a>
         </div>
 

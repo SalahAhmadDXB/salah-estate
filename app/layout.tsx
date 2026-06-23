@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond, Jost } from 'next/font/google';
+import { Cormorant_Garamond, Jost, Noto_Sans_Arabic } from 'next/font/google';
 import Script from 'next/script';
 import { personSchema, localBusinessSchema } from '@/lib/jsonld';
+import { I18nProvider } from '@/lib/i18n-context';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -16,6 +17,13 @@ const jost = Jost({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
   variable: '--font-jost',
+  display: 'swap',
+});
+
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-arabic',
   display: 'swap',
 });
 
@@ -88,7 +96,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
+    <html lang="en" dir="ltr" className={`${cormorant.variable} ${jost.variable} ${notoArabic.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -102,7 +110,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        {children}
+        <I18nProvider>
+          {children}
+        </I18nProvider>
 
         {GA_ID && (
           <>

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { useTranslation } from '@/hooks/useTranslation';
+import type { Locale } from '@/lib/i18n';
 import styles from './Calculator.module.css';
 
 function fmtAED(n: number): string {
@@ -10,11 +12,25 @@ function fmtAED(n: number): string {
   return 'AED ' + v.toLocaleString('en-US');
 }
 
+function yearsLabel(years: number, locale: Locale, yearSing: string, yearPlur: string): string {
+  if (locale === 'ru') {
+    if (years === 1) return `1 Год`;
+    if (years >= 2 && years <= 4) return `${years} Года`;
+    return `${years} Лет`;
+  }
+  return years + ' ' + (years === 1 ? yearSing : yearPlur);
+}
+
 export default function Calculator() {
+  const { t, locale } = useTranslation();
+  const calc = t.calculator;
+
   const [price, setPrice] = useState(5_000_000);
   const [yieldPct, setYieldPct] = useState(7);
   const [apprPct, setApprPct] = useState(8);
   const [years, setYears] = useState(5);
+
+  const yrsLabel = yearsLabel(years, locale, calc.year, calc.years);
 
   const annualRent = price * yieldPct / 100;
   const totalRent = annualRent * years;
@@ -22,67 +38,59 @@ export default function Calculator() {
   const capGain = projValue - price;
   const totalReturn = totalRent + capGain;
   const roiPct = Math.round((totalReturn / price) * 100);
-  const yearsLabel = years + (years === 1 ? ' Year' : ' Years');
 
   const sliders = [
     {
-      label: 'Property Price',
+      label: calc.price,
       display: fmtAED(price),
       min: 1_000_000, max: 50_000_000, step: 250_000,
-      value: price,
-      onChange: (v: number) => setPrice(v),
-      rangeMin: 'AED 1M', rangeMax: 'AED 50M',
+      value: price, onChange: (v: number) => setPrice(v),
+      rangeMin: calc.priceMin, rangeMax: calc.priceMax,
     },
     {
-      label: 'Annual Rental Yield',
+      label: calc.yieldLabel,
       display: yieldPct.toFixed(1) + '%',
       min: 3, max: 12, step: 0.1,
-      value: yieldPct,
-      onChange: (v: number) => setYieldPct(v),
+      value: yieldPct, onChange: (v: number) => setYieldPct(v),
       rangeMin: '3%', rangeMax: '12%',
     },
     {
-      label: 'Annual Appreciation',
+      label: calc.appreciation,
       display: apprPct.toFixed(1) + '%',
       min: 0, max: 15, step: 0.1,
-      value: apprPct,
-      onChange: (v: number) => setApprPct(v),
+      value: apprPct, onChange: (v: number) => setApprPct(v),
       rangeMin: '0%', rangeMax: '15%',
     },
     {
-      label: 'Holding Period',
-      display: yearsLabel,
+      label: calc.holding,
+      display: yrsLabel,
       min: 1, max: 20, step: 1,
-      value: years,
-      onChange: (v: number) => setYears(v),
-      rangeMin: '1 yr', rangeMax: '20 yrs',
+      value: years, onChange: (v: number) => setYears(v),
+      rangeMin: calc.holdMin, rangeMax: calc.holdMax,
     },
   ];
 
   const breakdown = [
-    { label: 'Annual rental income', value: fmtAED(annualRent) },
-    { label: `Rental income · ${yearsLabel}`, value: fmtAED(totalRent) },
-    { label: 'Capital appreciation', value: fmtAED(capGain) },
-    { label: 'Projected property value', value: fmtAED(projValue), highlight: true },
+    { label: calc.annualRent, value: fmtAED(annualRent) },
+    { label: `${calc.totalRent} ${yrsLabel}`, value: fmtAED(totalRent) },
+    { label: calc.capitalGain, value: fmtAED(capGain) },
+    { label: calc.projValue, value: fmtAED(projValue), highlight: true },
   ];
 
   const buildMsg = useCallback(() =>
-    `Hello Salah! I used your ROI calculator.\n\nProperty price: ${fmtAED(price)}\nRental yield: ${yieldPct.toFixed(1)}%\nAppreciation: ${apprPct.toFixed(1)}%\nHolding period: ${yearsLabel}\nProjected total return: ${fmtAED(totalReturn)}\nROI: ${roiPct}%\n\nI'd like to discuss this scenario.`,
-    [price, yieldPct, apprPct, years, yearsLabel, totalReturn, roiPct]
+    `Hello Salah! I used your ROI calculator.\n\nProperty price: ${fmtAED(price)}\nRental yield: ${yieldPct.toFixed(1)}%\nAppreciation: ${apprPct.toFixed(1)}%\nHolding period: ${yrsLabel}\nProjected total return: ${fmtAED(totalReturn)}\nROI: ${roiPct}%\n\nI'd like to discuss this scenario.`,
+    [price, yieldPct, apprPct, yrsLabel, totalReturn, roiPct]
   );
 
   return (
     <section id="calculator" className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.sectionLabel}>
-          <div className={`section-label`}>
-            <span>Investment Calculator</span>
-          </div>
+          <div className="section-label"><span>{calc.label}</span></div>
         </div>
-        <h2 className={styles.heading}>Model your returns in real time.</h2>
+        <h2 className={styles.heading}>{calc.heading}</h2>
 
         <div className={styles.layout}>
-          {/* Sliders */}
           <div className={styles.inputs}>
             {sliders.map((s) => (
               <div key={s.label} className={styles.sliderRow}>
@@ -92,9 +100,7 @@ export default function Calculator() {
                 </div>
                 <input
                   type="range"
-                  min={s.min}
-                  max={s.max}
-                  step={s.step}
+                  min={s.min} max={s.max} step={s.step}
                   value={s.value}
                   onChange={(e) => s.onChange(+e.target.value)}
                   aria-label={s.label}
@@ -107,14 +113,13 @@ export default function Calculator() {
             ))}
           </div>
 
-          {/* Results */}
           <div className={styles.results}>
             <div className={styles.resultLabel}>
-              Projected total return over {yearsLabel}
+              {calc.resultLabel} {yrsLabel}
             </div>
             <div className={styles.resultTotal}>{fmtAED(totalReturn)}</div>
             <div className={styles.roiBadge}>
-              <span className={styles.roiBadgeLabel}>Total ROI</span>
+              <span className={styles.roiBadgeLabel}>{calc.totalRoi}</span>
               <span className={styles.roiBadgeValue}>{roiPct}%</span>
             </div>
 
@@ -140,12 +145,9 @@ export default function Calculator() {
               rel="noopener noreferrer"
               className={styles.cta}
             >
-              Discuss this scenario with Salah
+              {calc.cta}
             </a>
-            <p className={styles.disclaimer}>
-              Estimates only. Rental income shown gross of fees; appreciation compounds annually.
-              Not financial advice.
-            </p>
+            <p className={styles.disclaimer}>{calc.disclaimer}</p>
           </div>
         </div>
       </div>

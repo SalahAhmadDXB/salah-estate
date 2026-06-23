@@ -1,11 +1,16 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './Hero.module.css';
+
+// Video source: Pexels — Dubai aerial footage (free license)
+// Preview: https://www.pexels.com/video/aerial-footage-of-dubai-3045163/
+const VIDEO_URL = 'https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4';
 
 export default function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onScroll = () => {
@@ -20,16 +25,19 @@ export default function Hero() {
 
   return (
     <section id="top" className={styles.hero}>
-      {/* Parallax background */}
+      {/* Parallax video background */}
       <div ref={bgRef} className={styles.bg}>
-        <Image
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85&auto=format&fit=crop"
-          alt=""
-          fill
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={styles.video}
+          poster="/images/villa-grandpolo.jpg"
+          preload="auto"
+        >
+          <source src={VIDEO_URL} type="video/mp4" />
+        </video>
       </div>
 
       {/* Gradient overlays */}
@@ -40,26 +48,23 @@ export default function Hero() {
       <div className={styles.content}>
         <div className={`${styles.eyebrow} rv`}>
           <span className={styles.eyebrowLine} />
-          <span className={styles.eyebrowText}>Dubai · Private Real Estate Advisory</span>
+          <span className={styles.eyebrowText}>{t.hero.eyebrow}</span>
         </div>
 
         <h1 className={`${styles.headline} rv`}>
-          Own a piece of the world&apos;s{' '}
-          <em className={styles.headlineGold}>fastest-rising</em> skyline.
+          {t.hero.headline1}{' '}
+          <em className={styles.headlineGold}>{t.hero.headlineEm}</em>{' '}
+          {t.hero.headline2}
         </h1>
 
-        <p className={`${styles.sub} rv`}>
-          Tax-free income. Freehold ownership. Double-digit appreciation. I help global
-          investors acquire Dubai&apos;s most coveted villas and branded residences — quietly,
-          and on the right terms.
-        </p>
+        <p className={`${styles.sub} rv`}>{t.hero.sub}</p>
 
         <div className={`${styles.actions} rv`}>
           <a href="#portfolio" className={styles.btnPrimary}>
-            View the Portfolio
+            {t.hero.ctaPrimary}
           </a>
           <a href="#calculator" className={styles.btnSecondary}>
-            Calculate Your Returns
+            {t.hero.ctaSecondary}
           </a>
         </div>
       </div>
