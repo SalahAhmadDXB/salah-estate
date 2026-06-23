@@ -4,9 +4,8 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
 import styles from './Hero.module.css';
 
-// Video source: Pexels — Dubai aerial footage (free license)
-// Preview: https://www.pexels.com/video/aerial-footage-of-dubai-3045163/
-const VIDEO_URL = 'https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4';
+// Local hero video (Dubai drone footage, 4.8MB)
+const VIDEO_URL = '/videos/hero.mp4';
 
 export default function Hero() {
   const bgRef = useRef<HTMLDivElement>(null);
