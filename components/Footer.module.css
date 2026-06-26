@@ -57,6 +57,14 @@
   color: var(--darkest);
   text-align: right;
 }
+.policyLink {
+  color: var(--darkest);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.policyLink:hover {
+  color: var(--gold);
+}
 
 @media (max-width: 900px) {
   .inner {

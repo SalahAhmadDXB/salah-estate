@@ -24,6 +24,8 @@ export default function Footer() {
         </nav>
         <p className={styles.copy}>
           © {year} Salah Private Estates. {f.copy}
+          {' '}&nbsp;·&nbsp;{' '}
+          <a href="/privacy-policy" className={styles.policyLink}>Privacy Policy</a>
         </p>
       </div>
     </footer>
